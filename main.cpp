@@ -9,18 +9,19 @@
 int main() {
   InternalCombustionEngineAssembler assembler;
 
+  try {
+    assembler.FromFile("datasets/example_engine.json");
+  } catch (...) {
+    std::cerr << "cannot open file (datasets/example_engine.json) or there is "
+                 "an error in the file";
+    return -1;
+  }
+
   float air_temperature{20.0f};
   std::cout << "Input air temperature:(*C)" << std::endl << "> ";
   std::cin >> air_temperature;
   if (!std::cin) {
     std::cerr << "parse input error";
-    return -1;
-  }
-
-  try {
-    assembler.FromFile("datasets/example_engine.json");
-  } catch (...) {
-    std::cerr << "cannot open file or there is an error in the file";
     return -1;
   }
 

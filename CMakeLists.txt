@@ -21,6 +21,11 @@ add_executable(test
         models/stand/max_power_stand.h
         models/stand/runner.h)
 
+add_custom_command(
+        TARGET test POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+        ${CMAKE_SOURCE_DIR}/datasets/example_engine.json
+        ${CMAKE_CURRENT_BINARY_DIR}/datasets/example_engine.json)
 
 target_compile_options(test PUBLIC -O2)
 target_link_libraries(test PRIVATE nlohmann_json::nlohmann_json)
